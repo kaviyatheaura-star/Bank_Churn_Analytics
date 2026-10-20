@@ -1,0 +1,49 @@
+Churn model report. Rows: 10,000. Churn rate: 20.37%.
+Train: 8,000  Test: 2,000 (stratified 80/20, seed 42).
+
+=== Gradient boosting (main model) ===
+ROC AUC:           0.8700
+Average precision: 0.7191
+Confusion matrix (rows=actual 0/1, cols=predicted 0/1):
+[[1301  292]
+ [ 102  305]]
+              precision    recall  f1-score   support
+
+    Retained       0.93      0.82      0.87      1593
+     Churned       0.51      0.75      0.61       407
+
+    accuracy                           0.80      2000
+   macro avg       0.72      0.78      0.74      2000
+weighted avg       0.84      0.80      0.82      2000
+
+=== Logistic regression (baseline) ===
+ROC AUC:           0.7772
+Average precision: 0.4679
+Confusion matrix (rows=actual 0/1, cols=predicted 0/1):
+[[1143  450]
+ [ 122  285]]
+              precision    recall  f1-score   support
+
+    Retained       0.90      0.72      0.80      1593
+     Churned       0.39      0.70      0.50       407
+
+    accuracy                           0.71      2000
+   macro avg       0.65      0.71      0.65      2000
+weighted avg       0.80      0.71      0.74      2000
+
+=== Logistic regression odds ratios (per 1 SD for numeric, vs baseline for categorical) ===
+          feature  odds_ratio
+Geography_Germany       2.274
+              Age       2.229
+          Balance       1.193
+  Geography_Spain       1.058
+  EstimatedSalary       1.052
+           Tenure       0.981
+        HasCrCard       0.969
+    NumOfProducts       0.944
+      CreditScore       0.916
+   IsActiveMember       0.643
+      Gender_Male       0.578
+
+Summary: gradient boosting AUC 0.870 vs logistic regression AUC 0.777.
+Odds ratio > 1 increases churn odds; < 1 decreases them.
